@@ -11,7 +11,7 @@ def save(filename, contents):
 
 if __name__ == '__main__':
     try:
-        class_number = raw_input("è¯·è¾“å…¥æŸ¥è¯¢ç­çº§å·ï¼š")
+        class_number = raw_input("ÇëÊäÈë²éÑ¯°à¼¶ºÅ£º")
         url = 'http://csujwc.its.csu.edu.cn/XSXJ/FB_BJXS_rpt.aspx?Sel_BJ=' + class_number
         print url
         user_agent = 'MOzilla/4.0 (compatible;MSIE 5.5;Windows NT)'

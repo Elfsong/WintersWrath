@@ -95,7 +95,7 @@ def movie_info_name(soup):
 if __name__ == "__main__":
     global counter
     global next_page_addr
-    counter = 1
+    counter = 1000
     next_page_addr = "index.html"
 
     while(next_page_addr != None):
