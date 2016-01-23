@@ -1,0 +1,10 @@
+2016-01-24 00:04:52,633 - ERROR - <module> -  Server abnormal:expected a character buffer object
+2016-01-24 01:01:53,236 - ERROR - get_weather -  Server abnormal
+2016-01-24 01:01:53,243 - ERROR - <module> -  Server abnormal:'int' object has no attribute 'get'
+2016-01-24 01:04:56,988 - ERROR - get_weather -  Server abnormal
+2016-01-24 01:04:56,990 - ERROR - <module> -  Server abnormal:'int' object has no attribute 'get'
+2016-01-24 01:40:55,262 - ERROR - print_weather -  Server abnormal:local variable 'time' referenced before assignment
+2016-01-24 01:42:14,894 - ERROR - print_weather -  Server abnormal:local variable 'time' referenced before assignment
+2016-01-24 01:45:16,551 - ERROR - print_weather -  Server abnormal:local variable 't' referenced before assignment
+2016-01-24 01:46:11,917 - ERROR - print_weather -  Server abnormal:local variable 't' referenced before assignment
+2016-01-24 01:47:19,422 - ERROR - print_weather -  Server abnormal:local variable 't' referenced before assignment
