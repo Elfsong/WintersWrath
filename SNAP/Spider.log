@@ -1,0 +1,16 @@
+Wed, 30 Mar 2016 16:24:19 remote_connection.py[line:409] DEBUG POST http://127.0.0.1:51698/wd/hub/session {"desiredCapabilities": {"platform": "ANY", "browserName": "phantomjs", "version": "", "javascriptEnabled": true}}
+Wed, 30 Mar 2016 16:24:19 remote_connection.py[line:502] DEBUG Finished Request
+Wed, 30 Mar 2016 16:24:19 remote_connection.py[line:409] DEBUG POST http://127.0.0.1:51698/wd/hub/session/cc5a1360-f650-11e5-b8f9-037d692f1df5/url {"url": "http://www.baidu.com\n", "sessionId": "cc5a1360-f650-11e5-b8f9-037d692f1df5"}
+Wed, 30 Mar 2016 16:24:20 remote_connection.py[line:502] DEBUG Finished Request
+Wed, 30 Mar 2016 16:24:20 remote_connection.py[line:409] DEBUG GET http://127.0.0.1:51698/wd/hub/session/cc5a1360-f650-11e5-b8f9-037d692f1df5/screenshot {"sessionId": "cc5a1360-f650-11e5-b8f9-037d692f1df5"}
+Wed, 30 Mar 2016 16:24:20 remote_connection.py[line:502] DEBUG Finished Request
+Wed, 30 Mar 2016 16:24:20 remote_connection.py[line:409] DEBUG GET http://127.0.0.1:51698/wd/hub/session/cc5a1360-f650-11e5-b8f9-037d692f1df5/title {"sessionId": "cc5a1360-f650-11e5-b8f9-037d692f1df5"}
+Wed, 30 Mar 2016 16:24:20 remote_connection.py[line:502] DEBUG Finished Request
+Wed, 30 Mar 2016 16:24:20 remote_connection.py[line:409] DEBUG POST http://127.0.0.1:51698/wd/hub/session/cc5a1360-f650-11e5-b8f9-037d692f1df5/url {"url": "http://www.126.com\n", "sessionId": "cc5a1360-f650-11e5-b8f9-037d692f1df5"}
+Wed, 30 Mar 2016 16:24:22 remote_connection.py[line:502] DEBUG Finished Request
+Wed, 30 Mar 2016 16:24:22 remote_connection.py[line:409] DEBUG GET http://127.0.0.1:51698/wd/hub/session/cc5a1360-f650-11e5-b8f9-037d692f1df5/screenshot {"sessionId": "cc5a1360-f650-11e5-b8f9-037d692f1df5"}
+Wed, 30 Mar 2016 16:24:22 remote_connection.py[line:502] DEBUG Finished Request
+Wed, 30 Mar 2016 16:24:22 remote_connection.py[line:409] DEBUG GET http://127.0.0.1:51698/wd/hub/session/cc5a1360-f650-11e5-b8f9-037d692f1df5/title {"sessionId": "cc5a1360-f650-11e5-b8f9-037d692f1df5"}
+Wed, 30 Mar 2016 16:24:22 remote_connection.py[line:502] DEBUG Finished Request
+Wed, 30 Mar 2016 16:24:22 remote_connection.py[line:409] DEBUG DELETE http://127.0.0.1:51698/wd/hub/session/cc5a1360-f650-11e5-b8f9-037d692f1df5 {"sessionId": "cc5a1360-f650-11e5-b8f9-037d692f1df5"}
+Wed, 30 Mar 2016 16:24:22 remote_connection.py[line:502] DEBUG Finished Request
