@@ -29,7 +29,20 @@ def set_logging():
 
 def get_302_url(url):
 	import urllib2,socket
-	request = urllib2.urlopen(urllib2.Request(url, headers = {'User-Agent':'Mozilla/8.0 (compatible; MSIE 8.0; Windows 7)'}))
-	#socket.setdefaulttimeout(30)
-	return request.url
+	from termcolor import colored, cprint
 
+	try:
+		request = urllib2.urlopen(urllib2.Request(url, headers = {'User-Agent':'Mozilla/8.0 (compatible; MSIE 8.0; Windows 7)'}))
+		socket.setdefaulttimeout(5)
+		return request.url
+	except:
+		cprint("Sorry...... Socket Timeout!",'red')
+		return url
+
+def connect_to_redis(DB=0):
+	import redis
+	global r
+	r = redis.Redis(host='localhost',port=6379,db=DB)
+
+def write_url_redis(original_url, skip_url):
+	return r.set(original_url, skip_url)
