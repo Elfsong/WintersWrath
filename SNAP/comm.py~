@@ -33,7 +33,7 @@ def get_302_url(url):
 
 	try:
 		request = urllib2.urlopen(urllib2.Request(url, headers = {'User-Agent':'Mozilla/8.0 (compatible; MSIE 8.0; Windows 7)'}))
-		socket.setdefaulttimeout(15)
+		socket.setdefaulttimeout(5)
 		return request.url
 	except:
 		cprint("Sorry...... Socket Timeout!",'red')
@@ -47,7 +47,7 @@ def connect_to_redis(DB=0):
 def write_url_redis(original_url, skip_url):
 	r.hset(original_url, 'Skip_url',  skip_url)
 
-def write_url_source_redis(url, source):
+def write_url_source_edis(url, source):
 	r.hset(url, 'Url_Source',  source)
 
 

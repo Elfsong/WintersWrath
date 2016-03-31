@@ -25,7 +25,7 @@ except:
 driver.get_screenshot_as_file("show.png")
 
 
-r.hset( request.url, 'Skip_url',  driver.current_url )
+return r.hset( request.url, 'Skip_url',  driver.current_url )
 
 
 

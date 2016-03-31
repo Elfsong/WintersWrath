@@ -17,6 +17,8 @@ def claw_url(original_url, skip_url):
 		url_info = urlparse( driver.current_url )
 
 		comm.write_url_redis( original_url, driver.current_url )
+		comm.write_url_source_redis( original_url, driver.page_source)
+		comm.write_url_source_redis( skip_url, driver.page_source)
 
 		driver.get_screenshot_as_file("/tmp/SitePic/"+url_info.netloc+".png")
 
@@ -29,7 +31,7 @@ def get_input(filename):
 
 if __name__ == "__main__":
 	comm.set_logging()
-	comm.connect_to_redis(0)
+	comm.connect_to_redis(1)
 
 	driver = webdriver.PhantomJS('/home/elfsong/phantomjs-2.1.1/bin/phantomjs')
 	driver.implicitly_wait(8)
