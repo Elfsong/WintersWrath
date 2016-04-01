@@ -21,6 +21,7 @@ def claw_url(original_url, skip_url):
 		comm.write_url_source_redis( skip_url, driver.page_source)
 
 		driver.get_screenshot_as_file("/tmp/SitePic/"+url_info.netloc+".png")
+		driver.get('http://about:blank')
 
 def get_input(filename):
 	input = open(filename)
