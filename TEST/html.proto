@@ -1,0 +1,6 @@
+syntax = "proto2";
+
+message html_segment{
+	optional int32 id=1;
+	optional string segment=2;
+}

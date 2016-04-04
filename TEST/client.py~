@@ -1,0 +1,25 @@
+#coding=utf-8
+
+import socket
+import urllib2
+import my_pb2
+import time
+import sys
+
+host = 'localhost'
+port = int(sys.argv[1])
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#client.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 2) #心跳维护
+client.connect((host, port))
+
+send_html = ["www.baidu.com","www.126.com","www.taobao.com","123456789"]
+
+
+for url in send_html:
+	client.send( url )  
+	time.sleep(0.001)
+	print('send a data')
+
+
+client.send( "EOF" )
+client.close()
