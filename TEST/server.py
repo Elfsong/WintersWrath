@@ -5,8 +5,8 @@ import html_pb2
 import zlib
 import redis
 
-reload(sys)
-sys.setdefaultencoding( "utf-8" ) 
+#reload(sys)
+#sys.setdefaultencoding( "utf-8" ) 
 
 BUF_SIZE = 8192
 host = 'localhost'
@@ -19,37 +19,16 @@ server.bind((host, port))
 server.listen(1) 
 client, address = server.accept()
 
-r = redis.Redis(host="localhost", port=6379,db=2)
 
-get_html = []
+data = client.recv(BUF_SIZE)
 
-while True:
-	data = client.recv(BUF_SIZE)
-	if(data != "EOF"):
-		get_html.append( data )
-	else:
-		client.close()
-		break
-	
-#client.close()
+result = zlib.decompress(data.decode('utf-8'))
+
+print result
+client.close()
 server.close()
 
-segment = html_pb2.html_segment()
-ll = 0
-html = ''
-fp = open("test.html",'wb')
-
-for ll in get_html:	
-	segment_obj = segment.FromString( ll )
-	html += segment_obj.segment
-
-#print html[:-3]
-html = html[:-3]
-
-fp.write( html )
-
-fp.close()
-
+print data
 
 
 
