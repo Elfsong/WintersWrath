@@ -1,12 +1,14 @@
 import os
 import sys
 import md5
+import time
 import requests
 import urllib
 import urllib2
+import multiprocessing
 from bs4 import BeautifulSoup
 
-def for_one_page( url ):
+def for_one_page_test( url ):
 	response = urllib2.urlopen( url )
 	html = response.read()
 	#print html
@@ -26,13 +28,11 @@ def image_downlode( url ):
 	img = requests.get( url )
 	name = get_name(url)
 	try:
-		open('/home/elfsong/Desktop/image/'+name,'wb').write(img._content)
+		open('/home/elfsong/Desktop/image1/'+name,'wb').write(img._content)
 		print ( name + " done!")
-		return True
 	except e:
 		print e
 		print ( name + " flased!")
-		return False
 	pass
 
 def get_name( url ):
@@ -44,9 +44,23 @@ def get_name( url ):
 if __name__ == "__main__":
 	start = 1950
 	end = 1960
+	
+	pool = multiprocessing.Pool(processes = 4)
+
+	btime = time.time()
+	
 	for page in range(start,end+1):
-		print ("http://jandan.net/ooxx/page-" + str(page))
-		for_one_page( "http://jandan.net/ooxx/page-" + str(page) )
+		url = "http://jandan.net/ooxx/page-" + str(page)
+		pool.apply_async(for_one_page_test, (url, ) )
+
+	pool.close()
+	pool.join()
+
+	etime = time.time()
+
+	print etime - btime
+	
+	
 	
 
 
