@@ -28,7 +28,7 @@ def image_downlode( url ):
 	img = requests.get( url )
 	name = get_name(url)
 	try:
-		open('/home/elfsong/Desktop/image1/'+name,'wb').write(img._content)
+		open('/mydata/image/'+name,'wb').write(img._content)
 		print ( name + " done!")
 	except e:
 		print e
