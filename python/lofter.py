@@ -100,10 +100,3 @@ if __name__ == "__main__":
 	downlode_reducer(core_num)
 	
 	pass
-
-	
-
-	
-		
-	
-
