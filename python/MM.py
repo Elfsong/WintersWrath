@@ -18,6 +18,9 @@ def for_one_page_test( url ):
 	#opener = urllib2.build_opener(urllib2.ProxyHandler({'http':'218.244.149.184:8888'}), urllib2.HTTPHandler(debuglevel=1))
 	#urllib2.install_opener(opener)
 
+	#opener = urllib2.build_opener(urllib2.ProxyHandler({'http':'80.242.171.35:8888'}), urllib2.HTTPHandler(debuglevel=1))
+	#urllib2.install_opener(opener)
+
 	UA = "Mozilla/"+ str(random.randint(10, 100))  +".0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9.1) Gecko/20090625 Firefox/3.5"
 	print UA
 	i_headers = {"User-Agent": "Mozilla/8.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9.1) Gecko/20090624 Firefox/3.5","Referer": 'http://jiandan.net'}
@@ -42,7 +45,7 @@ def image_downlode( url ):
 	img = requests.get( url )
 	name = get_name(url)
 	try:
-		open('/mydata/jiandan6/'+name,'wb').write(img._content)
+		open('/mydata/jiandan8/'+name,'wb').write(img._content)
 		print ( name + " done!")
 	except e:
 		print e
@@ -56,12 +59,12 @@ def get_name( url ):
 
 
 if __name__ == "__main__":
-	start = 1500 
-	end = 1550        
+	start = 1250 
+	end = 1300        
 
-	#driver = webdriver.PhantomJS('/home/erik/phantomjs-2.1.1/bin/phantomjs')
+	#driver = webdriver.PhantomJS('/home/erik/source/phantomjs-2.1.1/bin/phantomjs')
 	
-	pool = multiprocessing.Pool(processes = 12)
+	pool = multiprocessing.Pool(processes = 8)
 
 	btime = time.time()
 	
