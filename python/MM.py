@@ -7,6 +7,7 @@ import random
 import requests
 import urllib
 import urllib2
+from termcolor import colored
 import multiprocessing
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -23,18 +24,19 @@ def for_one_page_test( url ):
 
 	UA = "Mozilla/"+ str(random.randint(10, 100))  +".0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9.1) Gecko/20090625 Firefox/3.5"
 	print UA
+
 	i_headers = {"User-Agent": "Mozilla/8.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9.1) Gecko/20090624 Firefox/3.5","Referer": 'http://jiandan.net'}
      	req = urllib2.Request(url, headers=i_headers)
 	#html = driver.page_source.encode('utf8')
 	html = urllib2.urlopen(req).read()
-	print html
+	print colored( html , 'blue')
 	soup = BeautifulSoup(html)
 
 	for img_address in soup.find_all('a'):
 		if ( isinstance(img_address.get('class'), (list,str) ) and img_address.get('class')[0] == "view_img_link" ):
 			try:			
 				img_url = img_address.get('href')
-				print img_url
+				print colored( img_url , 'green')
 				image_downlode( img_url )
 			except:
 				print ("Cannot get attr!")
@@ -45,7 +47,7 @@ def image_downlode( url ):
 	img = requests.get( url )
 	name = get_name(url)
 	try:
-		open('/mydata/jiandan8/'+name,'wb').write(img._content)
+		open('/mydata/jiandan9/'+name,'wb').write(img._content)
 		print ( name + " done!")
 	except e:
 		print e
@@ -59,8 +61,8 @@ def get_name( url ):
 
 
 if __name__ == "__main__":
-	start = 1250 
-	end = 1300        
+	start = 1200 
+	end = 1250        
 
 	#driver = webdriver.PhantomJS('/home/erik/source/phantomjs-2.1.1/bin/phantomjs')
 	
