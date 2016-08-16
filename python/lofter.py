@@ -61,7 +61,7 @@ def image_downlode( url ):
 	img = requests.get( url )
 	img_name = get_name(url)
 	try:
-		open('/home/elfsong/Desktop/image/'+ name +"/"+img_name,'wb').write(img._content)
+		open('/mydata/image/'+ name +"/"+img_name,'wb').write(img._content)
 		print ( img_name + " done!")
 	except e:
 		print e
@@ -69,22 +69,22 @@ def image_downlode( url ):
 	pass
 
 def downlode_reducer( core_num ):
-	pool = multiprocessing.Pool(processes = core_num)
+	pool = multiprocessing.Pool(processes = int(core_num) )
 	for url in img_urls:
 		pool.apply_async(image_downlode,(url, ) )
-	print ("Task is Begin!")
 	pool.close()
 	pool.join()
+	exit()
 
 def create_folder( name ):
 	try:
-		os.makedirs('/home/elfsong/Desktop/image/'+ name)
+		os.makedirs('/mydata/image/'+ name)
 		print ("- Floder is Created -")
-	except e:
-		print e
+	except:
+		print("Error")
 		
 if __name__ == "__main__":
-	driver = webdriver.PhantomJS('/home/elfsong/phantomjs-2.1.1/bin/phantomjs')
+	driver = webdriver.PhantomJS('/home/erik/source/phantomjs-2.1.1/bin/phantomjs')
 
 	img_urls = []
 	
@@ -100,3 +100,4 @@ if __name__ == "__main__":
 	downlode_reducer(core_num)
 	
 	pass
+
