@@ -27,6 +27,8 @@ var onlineUsers = {};
 var onlineCount = 0;
 //发送消息条数
 var messageCount = 0;
+//消息队列推送数
+var messagePushCount = 10;
 
 io.on('connection', function(socket){
 		console.log('a user connected');
@@ -46,7 +48,7 @@ io.on('connection', function(socket){
 			//向所有客户端广播用户加入
 			io.emit('login', {onlineUsers:onlineUsers, onlineCount:onlineCount, user:obj});
 
-			for(var i = messageCount - 10; i <= messageCount; i++) {
+			for(var i = messageCount - messagePushCount; i <= messageCount; i++) {
 				client.hgetall(i, function(err, reply) {
 					if(!isEmpty(reply)) {
 						//用户id
