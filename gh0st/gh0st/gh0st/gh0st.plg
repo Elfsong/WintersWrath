@@ -1,0 +1,53 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: gh0st - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPA.tmp" with contents
+[
+/nologo /o"Release/gh0st.bsc" 
+".\Release\StdAfx.sbr"
+".\Release\Audio.sbr"
+".\Release\AudioDlg.sbr"
+".\Release\BmpToAvi.sbr"
+".\Release\BtnST.sbr"
+".\Release\Buffer.sbr"
+".\Release\BuildView.sbr"
+".\Release\CpuUsage.sbr"
+".\Release\CustomTabCtrl.sbr"
+".\Release\FileManagerDlg.sbr"
+".\Release\FileTransferModeDlg.sbr"
+".\Release\gh0st.sbr"
+".\Release\gh0stDoc.sbr"
+".\Release\gh0stView.sbr"
+".\Release\HoverEdit.sbr"
+".\Release\IniFile.sbr"
+".\Release\InputDlg.sbr"
+".\Release\IOCPServer.sbr"
+".\Release\KeyBoardDlg.sbr"
+".\Release\MainFrm.sbr"
+".\Release\ScreenSpyDlg.sbr"
+".\Release\SettingsView.sbr"
+".\Release\SEU_QQwry.sbr"
+".\Release\ShellDlg.sbr"
+".\Release\SystemDlg.sbr"
+".\Release\TabSDIFrameWnd.sbr"
+".\Release\ThemeUtil.sbr"
+".\Release\TrayIcon.sbr"
+".\Release\TrueColorToolBar.sbr"
+".\Release\WebCamDlg.sbr"
+".\Release\WinXPButtonST.sbr"]
+Creating command line "bscmake.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPA.tmp"
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+gh0st.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
