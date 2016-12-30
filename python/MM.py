@@ -35,8 +35,8 @@ def for_one_page_test( url ):
                                 print colored( img_url[2:] , 'green')
 				image_downlode( img_url )
 
-                        except Exception,e:  
-                                print Exception,":",e
+                        except Exception, e:  
+                                print Exception, ":", e
 			
 
 def image_downlode( url ):
@@ -45,8 +45,8 @@ def image_downlode( url ):
 	try:
 		open('/home/elfsong/image/'+name,'wb').write(img._content)
 		print ( name + " done!")
-	except e:
-		print e
+	except Exception, e:
+                print Exception, ":", e
 		print ( name + " flased!")
 	pass
 
@@ -59,7 +59,6 @@ def get_name( url ):
 if __name__ == "__main__":
 	start = 1200 
 	end = 1201        
-
 	pool = multiprocessing.Pool(processes = 8)
 
 	btime = time.time()
