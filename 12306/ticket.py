@@ -35,6 +35,8 @@ def search():
 
     options = ''.join([key for key, value in arguments.items() if value is True])
 
+    requests.packages.urllib3.disable_warnings()
+
     r = requests.get(url, verify=False)
     available_trains = r.json()['data']
     TrainsCollection(available_trains, options).pretty_print()
