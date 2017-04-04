@@ -1,0 +1,14 @@
+[INFO  - 2017-04-04T12:32:20.708Z] GhostDriver - Main - running on port 43664
+[INFO  - 2017-04-04T12:32:21.421Z] Session [bfbec820-1932-11e7-9b50-dda48a110beb] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2017-04-04T12:32:21.421Z] Session [bfbec820-1932-11e7-9b50-dda48a110beb] - page.customHeaders:  - {}
+[INFO  - 2017-04-04T12:32:21.421Z] Session [bfbec820-1932-11e7-9b50-dda48a110beb] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"linux-unknown-64bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2017-04-04T12:32:21.421Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: bfbec820-1932-11e7-9b50-dda48a110beb
+PhantomJS has crashed. Please read the bug reporting guide at
+<http://phantomjs.org/bug-reporting.html> and file a bug report.
+ind variable: google
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-04-04T12:32:42.881Z] Session [bfbec820-1932-11e7-9b50-dda48a110beb] - page.onError - stack:
+  global code (http://www.argus.space/js/grayscale.min.js:6)
+
+  phantomjs://platform/console++.js:263 in error
