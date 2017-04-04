@@ -14,16 +14,24 @@ logging.basicConfig(level=logging.DEBUG,
 
 
 @function.exeTime
-def work():
-    spider1 = function.spider(1, "spider-1")
-    spider2 = function.spider(2, "spider-2")
+def work(procs):
+    alloctor = function.Alloctor()  #生成装载器
+    logging.debug( str(procs) + ' 生成装载器...' )
+    spider = function.Sdriver()     #生成渲染器
+    logging.debug( str(procs) + ' 生成渲染器...' )
 
-    spider1.start()
-    spider2.start()
+    try:
+        while True:
+            url, level = alloctor.getUrl()
+            url_data = spider.get_page(url, level)
+            alloctor.update_data(url, url_data )
 
-    spider1.join()
-    spider2.join()
+    except Exception, e:
+        print e
+        logging.info( str(procs) + "装载器取不到url" )
+    finally:
+        spider.close_driver()
+
 
 if __name__ == "__main__":
-    work()
-    logging.debug( "主进程退出." )
+    work(1)

@@ -7,7 +7,6 @@ import time
 import redis
 import logging
 import function
-import threading
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 
@@ -35,7 +34,7 @@ def exeTime(func):
         return back
     return newFunc
 
-class alloctor:
+class Alloctor:
     def __init__(self):
         self.url = ''   #url地址
         self.host = '35.187.193.187'    #redis服务器地址
@@ -68,20 +67,22 @@ class alloctor:
         #sys.exit(0) #退出
 
     def update_data(self, data_name, data):
-        #try:
-        self.redis_db.hmset(data_name, data)
-        logging.info( '数据包回传成功' )
-        #except:
-        #    logging.error( '数据包回传失败，请检查Redis服务器.' )
+        try:
+            self.redis_db.hmset(data_name, data)
+            logging.debug( '数据包回传成功' )
+        except:
+            logging.error( '数据包回传失败，请检查Redis服务器.' )
 
 
-class sdriver:
+class Sdriver:
     def __init__(self):
         self.JS_PATH = '/home/dumingzhex/Downloads/phantomjs-2.1.1-linux-x86_64/bin/phantomjs'  #PhantomJS路径
-        self.IMAGE_PATH = '/home/dumingzhex/Project/Argus/Image/'   #截图保存路径
+        self.IMAGE_PATH = '/home/dumingzhex/Project/WintersWrath/webspider/Image/'   #截图保存路径
         self.driver = webdriver.PhantomJS(executable_path = self.JS_PATH)
-        self.driver.set_page_load_timeout(10)   #设置渲染超时时间
+        self.driver.set_page_load_timeout(5)   #设置渲染超时时间
+        self.driver.set_script_timeout(5)
         self.IMAGE_NAME = md5.new()
+
         try:
             logging.debug("Sdriver is already.")
         except:
@@ -89,85 +90,43 @@ class sdriver:
 
     def get_page(self, url, level):
         try:
-            try:
-                self.driver.get(url)
-            except TimeoutException:
-                logging.info( '页面 ' + url + ' 加载超时，正在停止加载...' )
-                self.driver.execute_script('window.stop()')
+            self.driver.get(url)
+        except TimeoutException:
+            self.driver.execute_script('window.stop()')
+            logging.info( '页面 ' + url + ' 加载超时，停止加载...' )
 
-            logging.info( '开始构建回传数据包...' )
+        url_list = []
+        pattern = re.compile(r'[a-zA-z]+://[^\s]*')
+        self.IMAGE_NAME.update(url)
+        md5_name = self.IMAGE_NAME.hexdigest()
 
+        try:
             page_source =  self.driver.page_source
             logging.info( '获取到 ' + url + ' 页面HTML' )
 
             link_handler = self.driver.find_elements_by_tag_name('a')
             logging.info( '获取到 ' + url + ' 链接资源' )
 
-            self.IMAGE_NAME.update(url)
-            md5_name = self.IMAGE_NAME.hexdigest()
             self.driver.save_screenshot( self.IMAGE_PATH + md5_name)
             logging.info( '获取到 ' + url + ' 截图' )
-
-            data = self.structure_data(url, page_source, link_handler, md5_name)
-
-        except Exception:
-            print Exception
-            logging.error( '页面解析错误，请检查URL是否正确.' )
-            #todo：estimate worry url list
-
-        return url, data
-
-    def structure_data(self, original_url, page_source, link_handler, md5_name):
-        url_list = []
-        pattern = re.compile(r'[a-zA-z]+://[^\s]*')
+        except Exception, e:
+            logging.error( '获取 ' + url + '内容失败' + e)
 
         try:
-            for url in link_handler:
-                match_url = pattern.match( url.get_attribute("href") )
+            for link_url in link_handler:
+                match_url = pattern.match( link_url.get_attribute("href") )
                 if match_url:
                     url_list.append(match_url.group().encode('utf-8'))
         except:
             logging.info( '外链资源异常.' )
 
-        data = { "page_source":page_source, "link_handler":url_list, "image": self.IMAGE_PATH + md5_name}
+        url_data = { "page_source":page_source, "link_handler":url_list, "image": self.IMAGE_PATH + md5_name}
+        #except:
+        #    logging.error( '获取 ' + url + '内容失败' )
+        #    data = {"result":"failed"}
 
-        logging.info( '回传数据包构建完成.' )
-        return data
+        return url_data
 
     def close_driver(self):
         self.driver.quit()
 
-class spider(threading.Thread):
-    def __init__(self, threadID, name):
-        logging.info( '正在生成爬取模块...' )
-        threading.Thread.__init__(self)
-        self.threadID = threadID
-        self.name = name
-        logging.info( '爬取模块生成完毕' )
-
-    def run(self):
-        logging.debug( self.name + " 开始工作." )
-
-        #############################################################
-
-        alloctor = function.alloctor()  #生成装载器
-        logging.info( self.name + ' 生成装载器...' )
-        spider = function.sdriver()     #生成渲染器
-        logging.info( self.name + ' 生成渲染器...' )
-
-        try:
-            while True:
-                url, level = alloctor.getUrl()
-                logging.info( self.name + ' 接单: ' +  url)
-                data_name, data = spider.get_page(url, level)
-                alloctor.update_data(data_name, data)
-        except LookupError:
-            logging.info( self.name + " 装载器无法获取URL信息，即将关闭" )
-        finally:
-            logging.info( self.name + ' 渲染器关闭' )
-            spider.close_driver()
-
-        #############################################################
-
-        logging.debug( self.name + " 已退出." )
-        pass
