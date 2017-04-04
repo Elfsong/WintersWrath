@@ -1,46 +1,8 @@
-[INFO  - 2017-04-04T17:24:51.374Z] GhostDriver - Main - running on port 58360
-[INFO  - 2017-04-04T17:24:52.149Z] Session [9ccc9120-195b-11e7-b109-718bb56bd2e9] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
-[INFO  - 2017-04-04T17:24:52.149Z] Session [9ccc9120-195b-11e7-b109-718bb56bd2e9] - page.customHeaders:  - {}
-[INFO  - 2017-04-04T17:24:52.149Z] Session [9ccc9120-195b-11e7-b109-718bb56bd2e9] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"linux-unknown-64bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
-[INFO  - 2017-04-04T17:24:52.149Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 9ccc9120-195b-11e7-b109-718bb56bd2e9
-[ERROR - 2017-04-04T17:25:06.748Z] Session [9ccc9120-195b-11e7-b109-718bb56bd2e9] - page.onError - msg: ReferenceError: Can't find variable: Audio
-
-  phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-04-04T17:25:06.749Z] Session [9ccc9120-195b-11e7-b109-718bb56bd2e9] - page.onError - stack:
-  u (http://img2.cache.netease.com/f2e/www/index2017/collect/first~7OV96wMZtIu5.js:5)
-  create (http://img2.cache.netease.com/f2e/www/index2017/collect/first~7OV96wMZtIu5.js:5)
-  d (http://img2.cache.netease.com/f2e/www/index2017/collect/first~7OV96wMZtIu5.js:5)
-  init (http://img2.cache.netease.com/f2e/www/index2017/collect/first~7OV96wMZtIu5.js:5)
-  (anonymous function) (http://img2.cache.netease.com/f2e/www/index2017/collect/first~7OV96wMZtIu5.js:2)
-
-  phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-04-04T17:25:12.588Z] Session [9ccc9120-195b-11e7-b109-718bb56bd2e9] - page.onError - msg: Error: undefined is not an object (evaluating 'e.style')
-i@http://img2.cache.netease.com/f2e/www/index2017/collect/first~7OV96wMZtIu5.js:1:7988
-http://img2.cache.netease.com/f2e/www/index2017/collect/first~7OV96wMZtIu5.js:1:17330
-each@http://img2.cache.netease.com/f2e/www/index2017/collect/first~7OV96wMZtIu5.js:1:10942
-css@http://img2.cache.netease.com/f2e/www/index2017/collect/first~7OV96wMZtIu5.js:1:17128
-e@http://img2.cache.netease.com/f2e/www/index2017/collect/first~7OV96wMZtIu5.js:4:25666
-i@http://img2.cache.netease.com/f2e/www/index2017/collect/first~7OV96wMZtIu5.js:4:52830
-n@http://img2.cache.netease.com/f2e/www/index2017/collect/first~7OV96wMZtIu5.js:4:52239
-set@http://img2.cache.netease.com/f2e/www/index2017/collect/first~7OV96wMZtIu5.js:4:53796
-http://img2.cache.netease.com/f2e/www/index2017/collect/first~7OV96wMZtIu5.js:4:55504
-http://img2.cache.netease.com/f2e/www/index2017/collect/first~7OV96wMZtIu5.js:2:51414
-each@http://img2.cache.netease.com/f2e/www/index2017/collect/first~7OV96wMZtIu5.js:1:10873
-updateRoles@http://img2.cache.netease.com/f2e/www/index2017/collect/first~7OV96wMZtIu5.js:2:26606
-$refresh@http://img2.cache.netease.com/f2e/www/index2017/collect/first~7OV96wMZtIu5.js:2:23214
-n@http://img2.cache.netease.com/f2e/www/index2017/collect/first~7OV96wMZtIu5.js:4:52317
-set@http://img2.cache.netease.com/f2e/www/index2017/collect/first~7OV96wMZtIu5.js:4:53796
-http://img2.cache.netease.com/f2e/www/index2017/collect/first~7OV96wMZtIu5.js:4:85560
-
-  phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-04-04T17:25:12.589Z] Session [9ccc9120-195b-11e7-b109-718bb56bd2e9] - page.onError - stack:
-  u (http://img2.cache.netease.com/f2e/www/index2017/collect/first~7OV96wMZtIu5.js:1)
-
-  phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-04-04T17:25:47.925Z] Session [9ccc9120-195b-11e7-b109-718bb56bd2e9] - page.onError - msg: ReferenceError: Can't find variable: google
-
-  phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-04-04T17:25:47.944Z] Session [9ccc9120-195b-11e7-b109-718bb56bd2e9] - page.onError - stack:
-  global code (http://www.argus.space/js/grayscale.min.js:6)
+[INFO  - 2017-04-04T20:47:20.646Z] GhostDriver - Main - running on port 46699
+[INFO  - 2017-04-04T20:47:21.532Z] Session [e6643920-1977-11e7-928a-4b98759da499] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2017-04-04T20:47:21.532Z] Session [e6643920-1977-11e7-928a-4b98759da499] - page.customHeaders:  - {}
+[INFO  - 2017-04-04T20:47:21.532Z] Session [e6643920-1977-11e7-928a-4b98759da499] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"linux-unknown-64bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2017-04-04T20:47:21.532Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: e6643920-1977-11e7-928a-4b98759da499
+[ERROR - 2017-04-04T20:47:21.541Z] RouterReqHand - _handle.error - {"name":"Missing Command Parameter","message":"{\"headers\":{\"Accept\":\"application/json\",\"Accept-Encoding\":\"identity\",\"Connection\":\"close\",\"Content-Length\":\"71\",\"Content-Type\":\"application/x-www-form-urlencoded\",\"Host\":\"127.0.0.1:46699\",\"User-Agent\":\"Python-urllib/2.7\"},\"httpVersion\":\"1.1\",\"method\":\"POST\",\"post\":\"{\\\"pageLoad\\\": 5000, \\\"sessionId\\\": \\\"e6643920-1977-11e7-928a-4b98759da499\\\"}\",\"postRaw\":\"{\\\"pageLoad\\\": 5000, \\\"sessionId\\\": \\\"e6643920-1977-11e7-928a-4b98759da499\\\"}\",\"url\":\"/timeouts\",\"urlParsed\":{\"anchor\":\"\",\"query\":\"\",\"file\":\"timeouts\",\"directory\":\"/\",\"path\":\"/timeouts\",\"relative\":\"/timeouts\",\"port\":\"\",\"host\":\"\",\"password\":\"\",\"user\":\"\",\"userInfo\":\"\",\"authority\":\"\",\"protocol\":\"\",\"source\":\"/timeouts\",\"queryKey\":{},\"chunks\":[\"timeouts\"]},\"urlOriginal\":\"/session/e6643920-1977-11e7-928a-4b98759da499/timeouts\"}","line":546,"sourceURL":"phantomjs://code/session_request_handler.js","stack":"_postTimeout@phantomjs://code/session_request_handler.js:546:73\n_handle@phantomjs://code/session_request_handler.js:148:25\n_reroute@phantomjs://code/request_handler.js:61:20\n_handle@phantomjs://code/router_request_handler.js:78:46"}
 
   phantomjs://platform/console++.js:263 in error
