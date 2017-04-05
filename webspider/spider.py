@@ -1,5 +1,4 @@
 #coding:utf-8
-import gc
 import time
 import logging
 import function
@@ -36,11 +35,9 @@ class ClockProcess(multiprocessing.Process):
         finally:
             logging.info( ' 渲染器关闭' )
             spider.close_driver()
-            del alloctor
             del spider
-            print gc.collect()
+            del alloctor
 
 if __name__ == '__main__':
-    for Proc in range(5):
+    for Proc in range(8):
         ClockProcess(Proc).start()
-
