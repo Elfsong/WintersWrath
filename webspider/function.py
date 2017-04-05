@@ -1,10 +1,10 @@
 #coding:utf-8
 import re
 import sys
-import md5
 import json
 import time
 import redis
+import hashlib  
 import logging
 import function
 from selenium import webdriver
@@ -27,10 +27,10 @@ logging.getLogger('').addHandler(console)
 def exeTime(func):
     def newFunc(*args, **args2):
         t0 = time.time()
-        print "@%s, {%s} start" % (time.strftime("%X", time.localtime()), func.__name__)
+        print ("@%s, {%s} start" % (time.strftime("%X", time.localtime()), func.__name__))
         back = func(*args, **args2)
-        print "@%s, {%s} end" % (time.strftime("%X", time.localtime()), func.__name__)
-        print "@%.3fs taken for {%s}" % (time.time() - t0, func.__name__)
+        print ("@%s, {%s} end" % (time.strftime("%X", time.localtime()), func.__name__))
+        print ("@%.3fs taken for {%s}" % (time.time() - t0, func.__name__))
         return back
     return newFunc
 
@@ -53,7 +53,7 @@ class Alloctor:
 
             if pre_url_json is not None:
                 #format: json(data = [{'url':'http://www.126.com', 'level':'1'}])
-                pre_url = json.loads(pre_url_json)['url'].encode('utf-8')
+                pre_url = json.loads(pre_url_json)['url'].decode('utf-8')
                 level = json.loads(pre_url_json)['level']
                 logging.info( str(pre_url) + ' is selected, level is ' + level )
                 return pre_url, level
@@ -81,7 +81,7 @@ class Sdriver:
         self.driver = webdriver.PhantomJS(executable_path = self.JS_PATH)
         self.driver.set_page_load_timeout(5)   #设置渲染超时时间
         self.driver.set_script_timeout(5)
-        self.IMAGE_NAME = md5.new()
+        self.IMAGE_NAME  = hashlib.md5() 
 
         try:
             logging.debug("Sdriver is already.")
@@ -90,11 +90,10 @@ class Sdriver:
 
     def get_page(self, url, level):
         try:
-            self.driver.get(url)
+            self.driver.get(url.decode('utf-8'))
         except TimeoutException:
             self.driver.execute_script('window.stop()')
             logging.info( '页面 ' + url + ' 加载超时，停止加载...' )
-
         url_list = []
         pattern = re.compile(r'[a-zA-z]+://[^\s]*')
         self.IMAGE_NAME.update(url)
@@ -109,7 +108,7 @@ class Sdriver:
 
             self.driver.save_screenshot( self.IMAGE_PATH + md5_name)
             logging.info( '获取到 ' + url + ' 截图' )
-        except Exception, e:
+        except Exception as e:
             logging.error( '获取 ' + url + '内容失败' + e)
 
         try:

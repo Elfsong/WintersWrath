@@ -26,8 +26,8 @@ def work(procs):
             url_data = spider.get_page(url, level)
             alloctor.update_data(url, url_data )
 
-    except Exception, e:
-        print e
+    except Exception as e:
+        print(e)
         logging.info( str(procs) + "装载器取不到url" )
     finally:
         spider.close_driver()
