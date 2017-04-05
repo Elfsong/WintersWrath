@@ -1,4 +1,5 @@
 #coding:utf-8
+import gc
 import time
 import logging
 import function
@@ -35,34 +36,11 @@ class ClockProcess(multiprocessing.Process):
         finally:
             logging.info( ' 渲染器关闭' )
             spider.close_driver()
+            del alloctor
+            del spider
+            print gc.collect()
 
 if __name__ == '__main__':
-    for Proc in range(4):
+    for Proc in range(5):
         ClockProcess(Proc).start()
 
-<<<<<<< HEAD
-
-@function.exeTime
-def work(procs):
-    alloctor = function.Alloctor()  #生成装载器
-    logging.debug( str(procs) + ' 生成装载器...' )
-    spider = function.Sdriver()     #生成渲染器
-    logging.debug( str(procs) + ' 生成渲染器...' )
-
-    try:
-        while True:
-            url, level = alloctor.getUrl()
-            url_data = spider.get_page(url, level)
-            alloctor.update_data(url, url_data )
-
-    except Exception as e:
-        print(e)
-        logging.info( str(procs) + "装载器取不到url" )
-    finally:
-        spider.close_driver()
-
-
-if __name__ == "__main__":
-    work(1)
-=======
->>>>>>> 82650f39769f8390897ed9493021990eb1261772
