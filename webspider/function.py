@@ -78,7 +78,7 @@ class Alloctor:
 class Sdriver:
     def __init__(self):
         self.JS_PATH = '/home/dumingzhex/Downloads/phantomjs-2.1.1-linux-x86_64/bin/phantomjs'  #PhantomJS路径
-        self.IMAGE_PATH = '/home/dumingzhex/Projects/WintersWrath/webspider/Image'   #截图保存路径
+        self.IMAGE_PATH = '/home/dumingzhex/Projects/WintersWrath/webspider/Image/'   #截图保存路径
         self.driver = webdriver.PhantomJS(executable_path = self.JS_PATH)
         self.driver.set_page_load_timeout(5)   #设置渲染超时时间
         self.driver.set_script_timeout(5)
