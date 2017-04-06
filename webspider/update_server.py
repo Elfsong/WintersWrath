@@ -49,10 +49,10 @@ class Updater:
 
 if __name__ == "__main__":
     updater = Updater()
-    size = updater.get_size()
     flag = 0
 
     while flag < 3:
+        size = updater.get_size()
         if size == 0:
             flag += 1
             print("未获取到元素，正在重试")

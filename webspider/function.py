@@ -55,7 +55,7 @@ class Alloctor:
                 #format: json(data = [{'url':'http://www.126.com', 'level':'1'}])
                 pre_url = json.loads(pre_url_json)['url'].encode('utf-8')
                 level = json.loads(pre_url_json)['level']
-                logging.info( str(pre_url) + ' is selected, level is ' + level )
+                logging.info( str(pre_url) + ' is selected, level is ' + str(level) )
                 return pre_url, level
 
             else:
@@ -78,7 +78,7 @@ class Alloctor:
 class Sdriver:
     def __init__(self):
         self.JS_PATH = '/home/dumingzhex/Downloads/phantomjs-2.1.1-linux-x86_64/bin/phantomjs'  #PhantomJS路径
-        self.IMAGE_PATH = '/home/dumingzhex/Project/WintersWrath/webspider/Image/'   #截图保存路径
+        self.IMAGE_PATH = '/home/dumingzhex/Projects/WintersWrath/webspider/Image'   #截图保存路径
         self.driver = webdriver.PhantomJS(executable_path = self.JS_PATH)
         self.driver.set_page_load_timeout(5)   #设置渲染超时时间
         self.driver.set_script_timeout(5)
@@ -95,6 +95,8 @@ class Sdriver:
         except TimeoutException:
             self.driver.execute_script('window.stop()')
             logging.info( '页面 ' + url + ' 加载超时，停止加载...' )
+        except Exception as e:
+            logging.info( " 未知错误: " + str(e) )
 
         url_list = []
         pattern = re.compile(r'[a-zA-z]+://[^\s]*')
@@ -108,10 +110,10 @@ class Sdriver:
             link_handler = self.driver.find_elements_by_tag_name('a')
             logging.info( '获取到 ' + url + ' 链接资源' )
 
-            self.driver.save_screenshot( self.IMAGE_PATH + md5_name)
+            self.driver.save_screenshot( self.IMAGE_PATH + md5_name + ".png")
             logging.info( '获取到 ' + url + ' 截图' )
         except Exception, e:
-            logging.error( '获取 ' + url + '内容失败' + e)
+            logging.error( '获取 ' + url + '内容失败' + str(e))
 
         try:
             for link_url in link_handler:
@@ -120,8 +122,10 @@ class Sdriver:
                     url_list.append(match_url.group().encode('utf-8'))
         except:
             logging.info( '外链资源异常.' )
+        finally:
+            link_data = json.dumps(url_list)
 
-        url_data = { "page_source":page_source, "link_handler":url_list, "image": self.IMAGE_PATH + md5_name}
+        url_data = { "page_source":page_source, "link_handler":link_data, "image": self.IMAGE_PATH + md5_name, "level":level}
         #except:
         #    logging.error( '获取 ' + url + '内容失败' )
         #    data = {"result":"failed"}
