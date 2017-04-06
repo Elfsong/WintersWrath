@@ -1,4 +1,6 @@
 #coding:utf-8
+import re
+import time
 import json
 import redis
 import logging
@@ -27,21 +29,39 @@ class Updater:
 
     def get_original_url(self):
         url = self.redis_db.spop("done")
+        return url
 
     def get_link_url(self, original_url):
-        print original_url
+        print(original_url)
         link_handler, level = self.redis_db.hmget(original_url, "link_handler", "level")
-        print level
 
-        for link_url in link_handler:
-            print link_url
-            if not self.redis_db.hexists(link_url,"level"):
-                data = {"url":"link_url", "level":int(level)+1}
-                data = json.dumps(data)
-                self.redis_db.sadd('preparation', data)
+        if int(level) < 3:
+            pattern = re.compile('"(.*?)"')
+            for link_url in pattern.findall(str(link_handler)[2:-1]):
+                print(link_url)
+                if not self.redis_db.hexists(link_url,"level"):
+                    data = {"url":link_url, "level":int(level)+1}
+                    data = json.dumps(data)
+                    self.redis_db.sadd('preparation', data)
+    def get_size(self):
+        size = int(self.redis_db.scard('done'))
+        return size
 
+if __name__ == "__main__":
+    updater = Updater()
+    size = updater.get_size()
+    flag = 0
 
-updater = Updater()
-original_url = updater.get_original_url()
-updater.get_link_url(original_url)
+    while flag < 3:
+        if size == 0:
+            flag += 1
+            print("未获取到元素，正在重试")
+            time.sleep(2)
+        else:
+            while updater.get_size() > 0:
+                original_url = updater.get_original_url()
+                updater.get_link_url(original_url)
+        pass
+
+    print("进程退出")
 
