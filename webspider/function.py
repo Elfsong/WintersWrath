@@ -1,4 +1,5 @@
 #coding:utf-8
+import os
 import re
 import sys
 import md5
@@ -8,6 +9,7 @@ import redis
 import logging
 import function
 from selenium import webdriver
+from google.cloud import storage
 from google.cloud.storage import Blob
 from selenium.common.exceptions import TimeoutException
 
@@ -37,7 +39,6 @@ def exeTime(func):
 
 class Uploder():
     def __init__(self):
-        self.IMAGE_DIR = "/home/dumingzhex/Projects/WintersWrath/webspider/Image/"
         self.storage_client = storage.Client()
         try:
             self.bucket = self.storage_client.get_bucket('argus_space')
@@ -49,7 +50,7 @@ class Uploder():
     def generator(self, file_name):
         #encryption_key = 'c7f32af42e45e85b9848a6a14dd2a8f6'
         self.blob = Blob( file_name, self.bucket, encryption_key=None )
-        self.blob.upload_from_filename( self.IMAGE_DIR + file_name )
+        self.blob.upload_from_filename( file_name )
         self.blob.make_public()
 
     def get_media_link(self):
@@ -116,7 +117,7 @@ class Sdriver:
         except:
             logging.error( '渲染器无法连接，请检查配置.' )
 
-    def get_page(self, url, level):
+    def get_page(self, url, level, uploder):
         try:
             self.driver.get(url)
         except TimeoutException:
@@ -139,6 +140,8 @@ class Sdriver:
 
             self.driver.save_screenshot( self.IMAGE_PATH + md5_name + ".png")
             logging.info( '获取到 ' + url + ' 截图' )
+            uploder.generator(self.IMAGE_PATH + md5_name + ".png")
+            image_public_url = uploder.get_public_link()
         except Exception, e:
             logging.error( '获取 ' + url + '内容失败' + str(e))
 
@@ -152,7 +155,7 @@ class Sdriver:
         finally:
             link_data = json.dumps(url_list)
 
-        url_data = { "page_source":page_source, "link_handler":link_data, "image": self.IMAGE_PATH + md5_name, "level":level}
+        url_data = { "page_source":page_source, "link_handler":link_data, "image": image_public_url, "level":level}
         #except:
         #    logging.error( '获取 ' + url + '内容失败' )
         #    data = {"result":"failed"}

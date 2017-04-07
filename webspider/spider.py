@@ -24,14 +24,13 @@ class ClockProcess(multiprocessing.Process):
         logging.info(  ' 生成装载器...' )
         spider = function.Sdriver()     #生成渲染器
         logging.info( ' 生成渲染器...' )
-        uploder = Uploder()             #生成上传器
+        uploder = function.Uploder()             #生成上传器
         logging.info( ' 生成上传器...' )
 
         try:
             while True:
                 url, level = alloctor.getUrl()
-                url_data = spider.get_page(url, level)
-                print(url_data['image'])
+                url_data = spider.get_page(url, level, uploder)
                 alloctor.update_data(url, url_data )
         except LookupError:
             logging.info( " 装载器无法获取URL信息，即将关闭" )
