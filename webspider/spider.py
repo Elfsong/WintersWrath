@@ -24,14 +24,18 @@ class ClockProcess(multiprocessing.Process):
         logging.info(  ' 生成装载器...' )
         spider = function.Sdriver()     #生成渲染器
         logging.info( ' 生成渲染器...' )
+        uploder = Uploder()             #生成上传器
+        logging.info( ' 生成上传器...' )
 
         try:
             while True:
                 url, level = alloctor.getUrl()
                 url_data = spider.get_page(url, level)
+                print(url_data['image'])
                 alloctor.update_data(url, url_data )
         except LookupError:
             logging.info( " 装载器无法获取URL信息，即将关闭" )
+
         finally:
             logging.info( ' 渲染器关闭' )
             spider.close_driver()
@@ -39,5 +43,6 @@ class ClockProcess(multiprocessing.Process):
             del alloctor
 
 if __name__ == '__main__':
-    for Proc in range(8):
+    for Proc in range(6):
         ClockProcess(Proc).start()
+

@@ -8,6 +8,7 @@ import redis
 import logging
 import function
 from selenium import webdriver
+from google.cloud.storage import Blob
 from selenium.common.exceptions import TimeoutException
 
 #################################################################################################
@@ -33,6 +34,32 @@ def exeTime(func):
         print "@%.3fs taken for {%s}" % (time.time() - t0, func.__name__)
         return back
     return newFunc
+
+class Uploder():
+    def __init__(self):
+        self.IMAGE_DIR = "/home/dumingzhex/Projects/WintersWrath/webspider/Image/"
+        self.storage_client = storage.Client()
+        try:
+            self.bucket = self.storage_client.get_bucket('argus_space')
+            print("bucket")
+        except Exception as e:
+            print(e)
+            print('Sorry, that bucket does not exist!')
+
+    def generator(self, file_name):
+        #encryption_key = 'c7f32af42e45e85b9848a6a14dd2a8f6'
+        self.blob = Blob( file_name, self.bucket, encryption_key=None )
+        self.blob.upload_from_filename( self.IMAGE_DIR + file_name )
+        self.blob.make_public()
+
+    def get_media_link(self):
+        return self.blob.media_link
+
+    def get_public_link(self):
+        return self.blob.public_url
+
+    def get_dir(self, dir_name):
+        return os.listdir(dir_name)
 
 class Alloctor:
     def __init__(self):
