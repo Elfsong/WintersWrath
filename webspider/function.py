@@ -11,6 +11,7 @@ import function
 from selenium import webdriver
 from google.cloud import storage
 from google.cloud.storage import Blob
+from termcolor import colored, cprint
 from selenium.common.exceptions import TimeoutException
 
 #################################################################################################
@@ -27,6 +28,7 @@ console.setFormatter(formatter)
 logging.getLogger('').addHandler(console)
 #################################################################################################
 
+#运行时间装饰器
 def exeTime(func):
     def newFunc(*args, **args2):
         t0 = time.time()
@@ -42,10 +44,9 @@ class Uploder():
         self.storage_client = storage.Client()
         try:
             self.bucket = self.storage_client.get_bucket('argus_space')
-            print("bucket")
+            logging.debug("成功获得GCP存储空间.")
         except Exception as e:
-            print(e)
-            print('Sorry, that bucket does not exist!')
+            logging.error( '指定存储空间不存在，请检查GCP.' )
 
     def generator(self, file_name):
         #encryption_key = 'c7f32af42e45e85b9848a6a14dd2a8f6'
@@ -71,7 +72,7 @@ class Alloctor:
         try:
             self.redis_db = redis.ConnectionPool(host = self.host, port = self.port, db = self.db)
             self.redis_db = redis.Redis(connection_pool = self.redis_db)
-            logging.debug("Alloctor is already.")
+            logging.info( colored(' 装载器准备完毕', 'green') )
         except:
             logging.error( '装载器无法连接Redis服务器，请检查配置.' )
 
@@ -98,22 +99,21 @@ class Alloctor:
         try:
             self.redis_db.hmset(data_name, data)
             self.redis_db.sadd("done", data_name)
-            logging.debug( '数据包回传成功' )
+            logging.info( colored(data_name + ' 数据包回传成功', 'green') )
         except:
             logging.error( '数据包回传失败，请检查Redis服务器.' )
 
 
 class Sdriver:
     def __init__(self):
-        self.JS_PATH = '/home/dumingzhex/Downloads/phantomjs-2.1.1-linux-x86_64/bin/phantomjs'  #PhantomJS路径
-        self.IMAGE_PATH = '/home/dumingzhex/Projects/WintersWrath/webspider/Image/'   #截图保存路径
-        self.driver = webdriver.PhantomJS(executable_path = self.JS_PATH)
-        self.driver.set_page_load_timeout(5)   #设置渲染超时时间
-        self.driver.set_script_timeout(5)
-        self.IMAGE_NAME = md5.new()
-
         try:
-            logging.debug("Sdriver is already.")
+            self.JS_PATH = '/home/dumingzhex/Downloads/phantomjs-2.1.1-linux-x86_64/bin/phantomjs'  #PhantomJS路径
+            self.IMAGE_PATH = '/home/dumingzhex/Projects/WintersWrath/webspider/Image/'   #截图保存路径
+            self.driver = webdriver.PhantomJS(executable_path = self.JS_PATH)
+            self.driver.set_page_load_timeout(5)   #设置渲染超时时间
+            self.driver.set_script_timeout(5)
+            self.IMAGE_NAME = md5.new()
+            logging.info( colored(' 渲染器准备完毕', 'green') )
         except:
             logging.error( '渲染器无法连接，请检查配置.' )
 
@@ -122,7 +122,7 @@ class Sdriver:
             self.driver.get(url)
         except TimeoutException:
             self.driver.execute_script('window.stop()')
-            logging.info( '页面 ' + url + ' 加载超时，停止加载...' )
+            logging.info( colored( '页面 ' + url + ' 加载超时，停止加载...', 'red', attrs=['blink']) )
         except Exception as e:
             logging.info( " 未知错误: " + str(e) )
 
@@ -151,7 +151,8 @@ class Sdriver:
                 if match_url:
                     url_list.append(match_url.group().encode('utf-8'))
         except:
-            logging.info( '外链资源异常.' )
+            logging.info( colored( '外链资源异常.', 'yellow') )
+
         finally:
             link_data = json.dumps(url_list)
 
@@ -164,4 +165,3 @@ class Sdriver:
 
     def close_driver(self):
         self.driver.quit()
-

@@ -3,6 +3,7 @@ import time
 import logging
 import function
 import multiprocessing
+from termcolor import colored, cprint
 
 
 #################################################################################################
@@ -21,11 +22,11 @@ class ClockProcess(multiprocessing.Process):
     @function.exeTime
     def run(self):
         alloctor = function.Alloctor()  #生成装载器
-        logging.info(  ' 生成装载器...' )
+        print(colored('生成装载器...', 'green'))
         spider = function.Sdriver()     #生成渲染器
-        logging.info( ' 生成渲染器...' )
-        uploder = function.Uploder()             #生成上传器
-        logging.info( ' 生成上传器...' )
+        print(colored('生成渲染器...', 'green'))
+        uploder = function.Uploder()    #生成上传器
+        print(colored('生成上传器...', 'green'))
 
         try:
             while True:
@@ -33,10 +34,10 @@ class ClockProcess(multiprocessing.Process):
                 url_data = spider.get_page(url, level, uploder)
                 alloctor.update_data(url, url_data )
         except LookupError:
-            logging.info( " 装载器无法获取URL信息，即将关闭" )
+            logging.info( colored('装载器无法获取URL信息，即将关闭', 'blue') )
 
         finally:
-            logging.info( ' 渲染器关闭' )
+            logging.info( colored('渲染器关闭', 'blue') )
             spider.close_driver()
             del spider
             del alloctor
@@ -44,4 +45,3 @@ class ClockProcess(multiprocessing.Process):
 if __name__ == '__main__':
     for Proc in range(6):
         ClockProcess(Proc).start()
-
