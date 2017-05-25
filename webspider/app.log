@@ -8564,3 +8564,5 @@ Tue, 11 Apr 2017 18:03:07 function.py[line:146] ERROR 获取 https://www.youtube
 Tue, 11 Apr 2017 18:03:07 function.py[line:154] INFO [33m外链资源异常.[0m
 Tue, 11 Apr 2017 18:03:07 spider.py[line:40] INFO [34m渲染器关闭[0m
 Tue, 11 Apr 2017 18:03:07 remote_connection.py[line:478] DEBUG DELETE http://127.0.0.1:52143/wd/hub/session/071bd970-1ee1-11e7-895a-f1c89204f1aa {"sessionId": "071bd970-1ee1-11e7-895a-f1c89204f1aa"}
+Wed, 12 Apr 2017 08:59:37 update_server.py[line:26] DEBUG Updater is already.
+Thu, 25 May 2017 10:35:45 update_server.py[line:26] DEBUG Updater is already.
