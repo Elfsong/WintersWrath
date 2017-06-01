@@ -10,3 +10,4 @@ data = {'url': sys.argv[1], 'level': sys.argv[2]}
 data = json.dumps(data)
 r.sadd('preparation', data)
 
+print('写入成功.')
