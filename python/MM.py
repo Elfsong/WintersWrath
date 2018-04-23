@@ -47,7 +47,7 @@ def image_downlode( url ):
 		print ( name + " done!")
 	except Exception, e:
                 print Exception, ":", e
-		print ( name + " flased!")
+		print ( name + " failed!")
 	pass
 
 def get_name( url ):
@@ -57,8 +57,8 @@ def get_name( url ):
 
 
 if __name__ == "__main__":
-	start = 1200 
-	end = 1201        
+	start = 50 
+	end = 68        
 	pool = multiprocessing.Pool(processes = 8)
 
 	btime = time.time()
