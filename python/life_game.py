@@ -29,15 +29,20 @@ class LifeSpace:
     
     def get_Z_status(self):
         print("--"*(self.size[0]/2) + str(self.iter_times)  + "--"*(self.size[0]/2))
-        print(self.Z)
+        line = ''
+        for i in self.Z: 
+            for j in i: line += "■" if j == 1 else "□"
+            print line
+            line = ''
+                
 
     def process(self, iter_time):
         for i in range(iter_time): 
             self.iterate()
             self.get_Z_status()
-            time.sleep(0.1)
+            time.sleep(0.3)
             subprocess.call("clear")
 
 if __name__ == "__main__":
-    newspace = LifeSpace("Elf", True, 16, 14)
-    newspace.process(100)
+    newspace = LifeSpace("Elf", True, 15, 30)
+    newspace.process(1000)
