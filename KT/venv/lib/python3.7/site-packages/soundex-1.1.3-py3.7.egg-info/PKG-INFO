@@ -1,0 +1,39 @@
+Metadata-Version: 1.1
+Name: soundex
+Version: 1.1.3
+Summary: Soundex algorith implementation for English and Indian languages
+Home-page: https://github.com/Project-SILPA/soundex
+Author: SILPA Developers
+Author-email: silpa-discuss@nongnu.org
+License: LGPL-2.1+
+Description: Soundex
+        #######
+        
+        .. image::
+           https://travis-ci.org/Project-SILPA/soundex.svg?branch=master
+           :target: https://travis-ci.org/Project-SILPA/soundex
+        
+        
+        
+        .. image::
+           https://coveralls.io/repos/Project-SILPA/soundex/badge.png?branch=master
+          :target: https://coveralls.io/r/Project-SILPA/soundex?branch=master
+        
+        
+        Soundex is phonetic algorithm for indexing names by sound as
+        pronounced in English. This module implements Soundex algorithm for
+        Engish as well as a modified version of soundex algorithm for Indian
+        languages.
+        
+        Details on how Soundex is implemented can be found at `Santhosh's blog
+        <http://thottingal.in/blog/2009/07/26/indicsoundex/>`_
+        
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: License :: DFSG approved
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v2 or later (LGPLv2+)
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: Programming Language :: Python
