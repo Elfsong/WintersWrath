@@ -3,11 +3,12 @@
 import json
 import re
 import random
-import jieba
 import numpy as np
-from itertools import chain
 from sklearn.svm import SVC
+
 from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix
+import jieba
 from bert_serving.client import BertClient
 
 
@@ -36,44 +37,64 @@ def cut_sent(para):
     return para.split("\n")
 
 
+def get_vector(word_list):
+    result = bc.encode([word_list], is_tokenized=True)
+    return result
+
+
+def sentence_process(sentence):
+    sentence_vector = get_vector(sentence)
+    return sentence_vector[0]
+
+
+def process(story):
+    story_vector_list = list()
+    _real_data = list()
+    for sentence in get_sentences(story):
+        sentence_vector = sentence_process(sentence)
+        story_vector_list += [sentence_vector]
+
+    for index in range(1, len(story_vector_list)):
+        new_vector = list(story_vector_list[index - 1]) + list(story_vector_list[index])
+        _real_data += [new_vector]
+
+    return story_vector_list, _real_data
+
+
 if __name__ == "__main__":
     bc = BertClient()
     stories = get_stories("es_stories.txt")
-    # stories = get_stories("tt")
-    real_vector_list = list()
-    vector_list = []
-    fake_vector_list = list()
-    count = 1
+
+    vector_list = list()
+    real_data = list()
+    fake_data = list()
+
     for story in stories:
-        print(count)
-        count += 1
-        story_object = json.loads(story)
-        sentences = get_sentences(story_object["content"])
-        vectors = bc.encode(sentences, is_tokenized=True)
-        vector_list += list(vectors)
-        for index in range(1, len(vectors) - 1):
-            v1 = list(vectors[index - 1])
-            v2 = list(vectors[index])
-            v3 = list(vectors[index + 1])
-            temp_vector = v1 + v2 + v3
-            real_vector_list += [temp_vector]
+        story = json.loads(story)
+        story_vector_list, _real_data = process(story["content"])
+        vector_list += story_vector_list
+        real_data += _real_data
 
-    for index in range(len(real_vector_list)):
-        temp_vector = list(chain(*random.sample(vector_list, 3)))
-        fake_vector_list += [temp_vector]
+    for i in range(len(real_data)):
+        a, b = random.sample(vector_list, 2)
+        new_vector = list(a) + list(b)
+        fake_data += [new_vector]
 
-    print("Start!!!")
+    test_data = real_data + fake_data
 
-    X = np.array(real_vector_list + fake_vector_list)
-    y = np.array([1]*len(real_vector_list) + [0]*len(fake_vector_list))
+
+    X = np.array(test_data)
+    y = np.array([1]*len(real_data) + [0]*len(fake_data))
+
     clf = SVC(gamma='auto')
     clf.fit(X, y)
 
-    result_list = list()
+    y_pred = list()
 
-    for item in real_vector_list + fake_vector_list:
-        result = clf.predict([item])
-        result_list += [result]
+    for test in X:
+        result = clf.predict(test.reshape(1, -1))
+        y_pred += [result]
 
-    score = accuracy_score(y, result_list)
-    print(score)
+    print(accuracy_score(y, y_pred))
+    tn, fp, fn, tp = confusion_matrix(y, y_pred).ravel()
+    print(tn, fp, fn, tp)
