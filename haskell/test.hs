@@ -1,11 +1,9 @@
-module Assignment1 (subst, interleave, unroll) where
+lend :: (Ord(a), Num(a)) => a -> a -> Maybe a
+lend amount balance = let reserve = 100
+                          newBalance = balance - amount
+    in if balance < reserve
+    then Nothing
+    else Just newBalance
 
-subst :: Eq t => t ->t  -> [t] -> [t]
-subst x y str = [if i==x then y else i | i <- str]
-
-interleave :: [t] -> [t] -> [t]
-interleave (x:xs) ys = x : interleave ys xs
-interleave [] t = t
-
-unroll :: Int -> [a] -> [a]
-unroll x y = [y !! (i `mod` length y) | i <- [0..x-1]]
+quux a = let a = "Foo"
+    in a ++ "tage"
