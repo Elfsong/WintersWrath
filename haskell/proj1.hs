@@ -2,17 +2,20 @@ import qualified Data.Char as D_Char
 import qualified Data.Maybe as D_Maybe
 import qualified Data.List as D_List
 
-data Pitch = Pitch { note :: Char,   
-                     octave :: Char   
-                   } deriving (Eq)
+data Pitch = Pitch { 
+    note :: Char,   
+    octave :: Char   
+    } deriving (Eq)
+
 instance Show Pitch where
     show (Pitch note octave) = [note, octave]
 
-data GameState = GameState { p_notes :: [Char],
-                             p_octave :: [Char],
-                             p_combinations :: [[[Char]]],
-                             guess :: [Pitch]
-                           } deriving (Eq, Show)
+data GameState = GameState { 
+    p_notes :: [Char],
+    p_octave :: [Char],
+    p_combinations :: [[[Char]]],
+    guess :: [Pitch]
+    } deriving (Eq, Show)
 
 
 toPitch :: String -> Maybe Pitch
